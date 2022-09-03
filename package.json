@@ -10,7 +10,7 @@
     "dev":"nodem index.js",
     "dev": "nodemon index.js"
   },
-  "proxy": "http://localhost:3001",
+
   "keywords": [],
   "author": "",
   "license": "ISC",
