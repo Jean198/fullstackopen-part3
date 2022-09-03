@@ -7,10 +7,11 @@ const cors = require('cors')
 require('dotenv').config(); // Import this line before the next line!!!
 const Person=require('./models/person')
 
-app.use(express.json())
+
 app.use(morgan('tiny'))
 app.use(cors())
 app.use(express.static('build'))
+app.use(express.json())
 
 const PORT = process.env.PORT || 3001
 
@@ -42,6 +43,17 @@ app.delete("/api/persons/:id", (req,res)=>{
     res.status(204).end()
    })
    .catch(err=>xonsole.log(err))
+})
+
+app.put("/api/persons/:id", (req,res, next)=>{
+  const newPerson=req.body
+  console.log(newPerson)
+  console.log(req.params.id)
+  Person.findByIdAndUpdate(req.params.id,newPerson, {new:true} )
+  .then(updatedPerson=> {
+    response.json(updatedPerson)
+  })
+  .catch(error => next(error))
 })
 
 app.post('/api/persons',(req,res)=>{
